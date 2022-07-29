@@ -2,7 +2,6 @@ package com.tlglearning.fizzbuzz.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -19,38 +18,27 @@ class AnalysisTest {
   static final Set<State> neitherExpected = EnumSet.noneOf(State.class);
 
   final Analysis analysis = new Analysis();
-//  Analysis analysis;
 
-//  @BeforeEach
-//  public void setUp(){
-//    Analysis analysis = new Analysis();
-//  }
 
   @ParameterizedTest
   @ValueSource(ints = {3, 21, 999_999_999})
   void analyze_fizz(int value) {
     assertEquals(fizzExpected, analysis.analyze(value));
-    //Set<State> expected = EnumSet.of(State.FIZZ);
-    //Analysis analysis =  new Analysis();
-    //assertEquals(expected, analysis.analyze(value));
+
   }
 
   @ParameterizedTest
   @ValueSource(ints = {0, 15, 999_999_990})
   void analyze_fizzBuzz(int value) {
     assertEquals(fizzBuzzExpected, analysis.analyze(value));
-    //Set<State> expected = EnumSet.of(State.FIZZ, State.BUZZ);
-    // Analysis analysis =  new Analysis();
-    //assertEquals(expected, analysis.analyze(value));
+
   }
 
   @ParameterizedTest
   @ValueSource(ints = {5, 10, 10000000})
   void analyze_buzz(int value) {
     assertEquals(buzzExpected, analysis.analyze(value));
-    //Set<State> expected = EnumSet.of(State.BUZZ);
-    //Analysis analysis =  new Analysis();
-    //assertEquals(expected, analysis.analyze(value));
+
   }
 
   @ParameterizedTest
@@ -58,36 +46,22 @@ class AnalysisTest {
     //@ValueSource(ints = {1, 11, -2, -13, 2_111_222_333, -2_111_222_333})
   void analyze_neither(int value) {
     assertEquals(neitherExpected, analysis.analyze(value));
-    //Set<State> expected = EnumSet.noneOf(State.class);
-    // Analysis analysis =  new Analysis();
-    // assertEquals(expected, analysis.analyze(value));
+
   }
 
   @ParameterizedTest
-  @ValueSource (ints = {-1, -3, -5, -15})
+  @ValueSource(ints = {-1, -3, -5, -15})
   void analyze_negative(int value) {
-    class InvalidInvocation implements Executable {
-
-      private final int value;
-
-      public InvalidInvocation(int value) {
-        this.value = value;
-      }
+    Executable invalidInvocation = new Executable() {
 
       @Override
       public void execute() throws Throwable {
         analysis.analyze(value);
 
       }
-    }
-    assertThrows(IllegalArgumentException.class, new InvalidInvocation(value) );
+    };
+    assertThrows(IllegalArgumentException.class, invalidInvocation);
 
-//    try {
-//      analysis.analyze(value);
-//      fail();
-//    } catch (IllegalArgumentException e){
-//
-//    }
   }
 
 

@@ -12,8 +12,8 @@ public class FizzBuzz {
 
     try {
       int upperBound = (args.length > 0) ? Integer.parseInt(args[0]) : DEFAULT_UPPER_BOUND;
-      if(upperBound <= 0){
-      throw new IllegalArgumentException();
+      if (upperBound <= 0) {
+        throw new IllegalArgumentException();
       }
 
       Analysis analysis = new Analysis();
