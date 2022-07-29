@@ -66,7 +66,8 @@ class AnalysisTest {
   @ParameterizedTest
   @ValueSource (ints = {-1, -3, -5, -15})
   void analyze_negative(int value) {
-   assertThrows(IllegalArgumentException.class, new InvalidInvocation(value));
+   assertThrows(IllegalArgumentException.class, new InvalidInvocation(value) );
+
 //    try {
 //      analysis.analyze(value);
 //      fail();
@@ -75,7 +76,7 @@ class AnalysisTest {
 //    }
   }
 
-  private class InvalidInvocation implements Executable {
+ class InvalidInvocation implements Executable {
 
     private final int value;
 
